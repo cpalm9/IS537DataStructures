@@ -2,12 +2,12 @@
 // add same class to parent and all children elements
 
 function setItemNode(node) {
-    x.addClass("class")
+    var child = node.childNodes;
     // foreach or for...in?
-    for (x in node) {
+    for (var x = 0; x < x-childNodes.length; x++) {
         // child should hit the sibling and recursively call function until all divs are hit
-        if (x.child) {
-            setItemNode(child);
+        if (child[x].childNodes) {
+            setItemNode(child[x]);
         }
         
     }
