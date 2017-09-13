@@ -4,7 +4,7 @@
 function setItemNode(node) {
     var child = node.childNodes;
     // foreach or for...in?
-    for (var x = 0; x < x-childNodes.length; x++) {
+    for (var x = 0; x < childNodes.length; x++) {
         // child should hit the sibling and recursively call function until all divs are hit
         if (child[x].childNodes) {
             setItemNode(child[x]);
