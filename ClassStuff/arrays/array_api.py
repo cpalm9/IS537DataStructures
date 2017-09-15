@@ -82,14 +82,14 @@ class Array(object):
                 self.data[index] = item
                 self.size +=1   
         except:
-            print('Did not work')
+            print('Error: Out of Bounds')
     
     def set(self, index, item):
         '''Sets the given item at the given index.  Throws an exception if the index is not within the bounds of the array.'''
         if (self._check_bounds(index)):
             self.data[index] = item
         else:
-            print("out of bounds")
+            print("Error: Out of bounds")
 
         
     def get(self, index):
@@ -97,7 +97,7 @@ class Array(object):
         if (self._check_bounds(index)):
             print(self.data[index])
         else:
-            print("out of bounds")
+            print("Error: Out of bounds")
     
     def delete(self, index):
         '''Deletes the item at the given index, decreasing the allocated memory if needed.  Throws an exception if the index is not within the bounds of the array.'''

@@ -3,25 +3,34 @@ import csv
 
 with open('data.csv') as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
+    r = 0
     for row in reader:
         command = row[0]
         if command == 'CREATE':
                 array1 = Array()
+                print('{}: {}'.format(r, ', '.join(str(e) for e in row)))
         elif command == 'DEBUG':
                 array1.debug_print()
+                print('{}: {}'.format(r, ', '.join(str(e) for e in row)))
         elif command == 'ADD':
                 array1.add(row[1])
+                print('{}: {}'.format(r, ', '.join(str(e) for e in row)))
         elif command == 'GET':
                 array1.get(int(row[1]))
+                print('{}: {}'.format(r, ', '.join(str(e) for e in row)))
         elif command == 'SET':
                 array1.set(int(row[1]),row[2])
+                print('{}: {}'.format(r, ', '.join(str(e) for e in row)))
         elif command == 'INSERT':
                 array1.insert(int(row[1]),row[2])
+                print('{}: {}'.format(r, ', '.join(str(e) for e in row)))
         elif command == 'DELETE':
                 array1.delete(int(row[1]))
+                print('{}: {}'.format(r, ', '.join(str(e) for e in row)))
         elif command == 'SWAP':
                 array1.swap(int(row[1]), int(row[2]))
-
+                print('{}: {}'.format(r, ', '.join(str(e) for e in row)))
+        r += 1
 # array = Array()
 # array.debug_print()
 # array.add('a')
