@@ -15,17 +15,25 @@ class Array(object):
         
     def debug_print(self):
         '''Prints a representation of the entire allocated space, including unused spots.'''
-        print(self.size + ' of ' + self.data + ' >>> ' + ', '.join(self))
+        print('{} of {} >>> {}'.format(self.size, len(self.data), ', '.join([ str(item) for item in self.data ])))
         
         
     def _check_bounds(self, index):
         '''Ensures the index is within the bounds of the array: 0 <= index <= size.'''
-        
+        if index > self.size or index < 0:
+            return False
+        else:
+            return True
+            
     def _check_increase(self):
         '''
         Checks whether the array is full and needs to increase by chunk size
         in preparation for adding an item to the array.
         '''
+        if self.data.count(None) == 0:
+            self.data = alloc(self.size + 5)
+                
+            
         
         
     def _check_decrease(self):
@@ -50,27 +58,30 @@ class Array(object):
     
     def set(self, index, item):
         '''Sets the given item at the given index.  Throws an exception if the index is not within the bounds of the array.'''
-        try:
-            if index < self.size:
-                self.data[index] = item
-            else:
-                self.add(item)
-        except:
-            print('No workie')
+        if (self._check_bounds(index)):
+            self.data[index] = item
+        else:
+            print("out of bounds")
+
         
     def get(self, index):
         '''Retrieves the item at the given index.  Throws an exception if the index is not within the bounds of the array.'''
-        try:
+        if (self._check_bounds(index)):
             print(self.data[index])
-        except:
-            print('Out of bounds')
+        else:
+            print("out of bounds")
     
     def delete(self, index):
         '''Deletes the item at the given index, decreasing the allocated memory if needed.  Throws an exception if the index is not within the bounds of the array.'''
-        
+        if (self._check_bounds(index)):
+            self.data[index] = None
+            self.size -= 1
         
     def swap(self, index1, index2):
         '''Swaps the values at the given indices.'''
+        x = self.data[index1]
+        self.data[index1] = self.data[index2]
+        self.data[index2] = x
         
         
         
@@ -91,8 +102,8 @@ def memcpy(dest, source, size):
     '''
     Copies items from one array to another.  This is similar to C's memcpy function.
     '''
-    # dest = alloc(size)
-    # dest = [source]
-    # return dest
+    dest = alloc(size)
+    dest = [source]
+    return dest
 
         
