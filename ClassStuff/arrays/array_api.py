@@ -31,11 +31,14 @@ class Array(object):
         in preparation for adding an item to the array.
         '''
         if self.data.count(None) == 0:
-            self.data = alloc(self.size + 5)
-                
-            
-        
-        
+            self.size += 5
+            newArray = alloc(self.size)
+            memcpy(newArray, self.data, self.size)
+            self.data = newArray
+            self.size = self.size - self.data.count(None)
+            return True
+        else:
+            return False
     def _check_decrease(self):
         '''
         Checks whether the array has too many empty spots and can be decreased by chunk size.
@@ -46,13 +49,19 @@ class Array(object):
         
     def add(self, item):
         '''Adds an item to the end of the array, allocating a larger array if necessary.'''
-        self.data[self.size] = item
-        self.size += 1
+        if(self._check_increase()):
+            self.data[self.size] = item
+            self.size += 1
+        else:
+            self.data[self.size] = item
+            self.size += 1
   
     def insert(self, index, item):
         '''Inserts an item at the given index, shifting remaining items right and allocating a larger array if necessary.'''
         try:
-            print('in progress')
+            if(self._check_increase()):
+                self.data[index] = item
+            
         except:
             print('Did not work')
     
@@ -102,8 +111,9 @@ def memcpy(dest, source, size):
     '''
     Copies items from one array to another.  This is similar to C's memcpy function.
     '''
-    dest = alloc(size)
-    dest = [source]
+    for x in source:
+        for y in range(len(source)):
+            dest[y] = x
     return dest
 
         

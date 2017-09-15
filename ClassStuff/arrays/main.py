@@ -18,7 +18,5 @@ array1.add('test0')
 array1.add('test1')
 array1.add('test0')
 array1.add('test1')
-array1._check_increase()
 array1.debug_print()
-
 
