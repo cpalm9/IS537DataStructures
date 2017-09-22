@@ -44,10 +44,17 @@ class LinkedList(object):
         
     def insert(self, index, item):
         '''Inserts an item at the given index, shifting remaining items right.'''
-        if index is not 0:
+        if index <= self.size:
+            new_item = Node(item)
             n = self._get_node(index)
-            for x in range(self.size):
-                n = n.next
+            prev_val = self._get_node(index - 1)
+            
+            prev_val.next = new_item
+            new_item.next = n
+            
+            self.size += 1
+        else:
+            print('Error: Out of Bounds')
 
     
     def set(self, index, item):
@@ -67,17 +74,32 @@ class LinkedList(object):
             print('Error: Out of Bounds')
     def delete(self, index):
         '''Deletes the item at the given index. Throws an exception if the index is not within the bounds of the linked list.'''
-        if index is not 0:
-            prev_val = self._get_node(index-1)
-            prev_val.next = self._get_node(index+1)
-        else:
-            self.head = self._get_node(index+1)
+        if index < self.size:
+            if index is not 0:
+                prev_val = self._get_node(index-1)
+                prev_val.next = self._get_node(index+1)
+            else:
+                self.head = self._get_node(index+1)
 
-        self.size -= 1
+            self.size -= 1
+        else:
+            print('Error: Out of Bounds')
     def swap(self, index1, index2):
         '''Swaps the values at the given indices.'''
-        node1 = self._get_node(index1)
-        node2 = self._get_node(index2)
+        if (index2 <= self.size):
+            if index1 is not 0:
+                swap_node = self._get_node(index1).value
+                self._get_node(index1).value = self._get_node(index2).value
+                self._get_node(index2).value = swap_node
+            else:
+                swap_node = self._get_node(index1).value
+                self._get_node(index1).value = self._get_node(index2).value
+                self._get_node(index2).value = swap_node
+                
+        else:
+            print('Error: Out of Bounds')
+        
+        
         
         
         
