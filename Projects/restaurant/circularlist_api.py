@@ -14,7 +14,7 @@ class CircularLinkedList(object):
         '''Prints a representation of the entire list.'''
         values = []
         n = self.head
-        while n != None:
+        for x in range(self.size):
             values.append(str(n.value))
             n = n.next
         print('{} >>> {}'.format(self.size, ', '.join(values))) 
@@ -40,6 +40,8 @@ class CircularLinkedList(object):
             last_node = self._get_node(self.size-1)
             last_node.next = Node(item)
             self.size += 1
+            new_node = self._get_node(self.size-1)
+            new_node.next = self.head
         else:
             self.head = Node(item)
             self.size += 1

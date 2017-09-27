@@ -53,5 +53,7 @@ from circularlist_api import CircularLinkedList, CircularLinkedListIterator
 cl = CircularLinkedList()
 cl.add('test')
 cl.add('test1')
+cl.add('test2')
 cl.debug_print()
+cl.get(0)
 cl.get(1)
