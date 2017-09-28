@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from linkedlist import LinkedList
+from linkedlist_api import LinkedList
 
 class Stack(LinkedList):
     '''
@@ -11,7 +11,7 @@ class Stack(LinkedList):
     
     def push(self, item):
         '''Pushes an item onto the stack'''
-        
+        self.insert(self.size,item)
 
     def pop(self):
         '''
@@ -20,4 +20,7 @@ class Stack(LinkedList):
             2. Delete the node from the list.
             3. Return the value of the node.
         '''
+        end_node = self._get_node(self.size - 1)
+        self.delete(self.size - 1)
+        print(end_node.value)
 

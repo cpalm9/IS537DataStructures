@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from circularlist_api import CircularLinkedList, CircularLinkedListIterator
 from doublylinkedlist_api import DoublyLinkedList
-# from stack_api import Stack
+from stack_api import Stack
 # from queue_api import Queue
 
 
@@ -50,22 +50,22 @@ from doublylinkedlist_api import DoublyLinkedList
 #     processor = Processor()
 #     processor.run(f)
 
-cl = CircularLinkedList()
-cl.add('test')
-cl.add('test1')
-cl.add('test2')
-cl.debug_print()
-cl.get(0)
-cl.get(1)
-cl.set(0, 'TEST')
-cl.debug_print()
-cl.delete(2)
-cl.debug_print()
-cl.insert(1, 'INSERT')
-cl.debug_print()
-cl.swap(0,1)
-cl.debug_print()
-cl.debug_cycle(4)
+# cl = CircularLinkedList()
+# cl.add('test')
+# cl.add('test1')
+# cl.add('test2')
+# cl.debug_print()
+# cl.get(0)
+# cl.get(1)
+# cl.set(0, 'TEST')
+# cl.debug_print()
+# cl.delete(2)
+# cl.debug_print()
+# cl.insert(1, 'INSERT')
+# cl.debug_print()
+# cl.swap(0,1)
+# cl.debug_print()
+# cl.debug_cycle(4)
 
 # dl = DoublyLinkedList()
 # dl.add('test')
@@ -79,5 +79,15 @@ cl.debug_cycle(4)
 # dl.debug_print()
 # dl.delete(3)
 # dl.debug_print()
+
+st = Stack()
+st.push('test')
+st.debug_print()
+st.push('test1')
+st.debug_print()
+st.push('test2')
+st.debug_print()
+st.pop()
+st.debug_print()
 
 
