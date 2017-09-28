@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from circularlist_api import CircularLinkedList, CircularLinkedListIterator
-# from doublylinkedlist_api import DoublyLinkedList
+from doublylinkedlist_api import DoublyLinkedList
 # from stack_api import Stack
 # from queue_api import Queue
 
@@ -50,10 +50,26 @@ from circularlist_api import CircularLinkedList, CircularLinkedListIterator
 #     processor = Processor()
 #     processor.run(f)
 
-cl = CircularLinkedList()
-cl.add('test')
-cl.add('test1')
-cl.add('test2')
-cl.debug_print()
-cl.get(0)
-cl.get(1)
+# cl = CircularLinkedList()
+# cl.add('test')
+# cl.add('test1')
+# cl.add('test2')
+# cl.debug_print()
+# cl.get(0)
+# cl.get(1)
+# cl.set(0, 'TEST')
+# cl.debug_print()
+# cl.delete(2)
+# cl.debug_print()
+# cl.insert(1, 'INSERT')
+# cl.debug_print()
+# cl.swap(0,1)
+# cl.debug_print()
+
+dl = DoublyLinkedList()
+dl.add('test')
+dl.add('test1')
+dl.add('test2')
+dl.debug_print()
+dl.get(1)
+dl.get(2)

@@ -48,11 +48,27 @@ class CircularLinkedList(object):
         
     def insert(self, index, item):
         '''Inserts an item at the given index, shifting remaining items right.'''
-        
+        if index <= self.size:
+            new_item = Node(item)
+            n = self._get_node(index)
+            prev_val = self._get_node(index - 1)
+            
+            prev_val.next = new_item
+            new_item.next = n
+            
+            self.size += 1
+            end_node = self._get_node(self.size - 1)
+            end_node.next = self.head
+        else:
+            print('Error: Out of Bounds')
     
     def set(self, index, item):
         '''Sets the given item at the given index.  Throws an exception if the index is not within the bounds of the linked list.'''
-        
+        if index < self.size:
+            node = self._get_node(index)
+            node.value = item
+        else:
+            print('Error: Out of Bounds')
         
     def get(self, index):
         '''Retrieves the item at the given index.  Throws an exception if the index is not within the bounds of the linked list.'''
@@ -65,7 +81,17 @@ class CircularLinkedList(object):
     
     def delete(self, index):
         '''Deletes the item at the given index. Throws an exception if the index is not within the bounds of the linked list.'''
-        
+        if index < self.size:
+            if index is not 0:                    
+                prev_val = self._get_node(index-1)
+                prev_val.next = self._get_node(index+1)
+            else:
+                self.head = self._get_node(index+1)
+            self.size -= 1
+            end_node = self._get_node(self.size - 1)
+            end_node.next = self.head
+        else:
+            print('Error: Out of Bounds')
         
     def swap(self, index1, index2):
         '''Swaps the values at the given indices.'''
