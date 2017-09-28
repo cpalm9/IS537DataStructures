@@ -21,7 +21,15 @@ class CircularLinkedList(object):
         
     def debug_cycle(self, count):
         '''Prints a representation of the entire cycled list up to count items'''
-        
+        c = 0
+        while c < count:
+            values = []
+            n = self.head
+            for x in range(self.size):
+                values.append(str(n.value))
+                n = n.next
+            print('{} >>> {} >>>> COUNT: {}'.format(self.size, ', '.join(values), c))
+            c += 1 
         
     def _get_node(self, index):
         '''Retrieves the Node object at the given index.  Throws an exception if the index is not within the bounds of the linked list.'''

@@ -9,16 +9,22 @@ class DoublyLinkedList(object):
     def __init__(self):
         '''Creates a linked list.'''
         self.head = None
+        self.tail = None
         self.size = 0
         
     def debug_print(self):
         '''Prints a representation of the entire list.'''
         values = []
+        reverse = []
         n = self.head
+        r = self.tail
         for x in range(self.size):
             values.append(str(n.value))
             n = n.next
-        print('{} >>> {}'.format(self.size, ', '.join(values))) 
+        for x in range(self.size, 0,-1):
+            reverse.append(str(r.value))
+            r = r.prev
+        print('{} >>> {} >>> {}'.format(self.size, ', '.join(values), ' ,'.join(reverse))) 
         
     def _get_node(self, index):
         '''Retrieves the Node object at the given index.  Throws an exception if the index is not within the bounds of the linked list.'''
@@ -39,6 +45,7 @@ class DoublyLinkedList(object):
             self.size += 1
             end_node = self._get_node(self.size - 1)
             end_node.prev = self._get_node(self.size - 2)
+            self.tail = end_node
         else:
             self.head = Node(item)
             self.size += 1
@@ -52,6 +59,8 @@ class DoublyLinkedList(object):
             
             prev_val.next = new_item
             new_item.next = n
+            new_item.prev = prev_val
+            n.prev = new_item
             
             self.size += 1
         else:
@@ -69,17 +78,43 @@ class DoublyLinkedList(object):
         '''Retrieves the item at the given index.  Throws an exception if the index is not within the bounds of the linked list.'''
         if index < self.size:
             node = self._get_node(index)
-            print(node.value)
+            print('{}'.format(node.value))
         else:
             print('Error: Out of Bounds')
     
     def delete(self, index):
         '''Deletes the item at the given index. Throws an exception if the index is not within the bounds of the linked list.'''
-        
+        if index < self.size:
+            if index is not 0:
+                if index == self.size - 1:
+                    prev_val = self._get_node(index-1)
+                    self.tail = prev_val
+                else:
+                    prev_val = self._get_node(index-1)
+                    next_val = self._get_node(index+1)
+                    prev_val.next = next_val
+                    next_val.prev = prev_val
+            else:
+                self.head = self._get_node(index+1)
+
+            self.size -= 1
+        else:
+            print('Error: Out of Bounds')
         
     def swap(self, index1, index2):
         '''Swaps the values at the given indices.'''
-        
+        if (index2 <= self.size):
+            if index1 is not 0:
+                swap_node = self._get_node(index1).value
+                self._get_node(index1).value = self._get_node(index2).value
+                self._get_node(index2).value = swap_node
+            else:
+                swap_node = self._get_node(index1).value
+                self._get_node(index1).value = self._get_node(index2).value
+                self._get_node(index2).value = swap_node
+                
+        else:
+            print('Error: Out of Bounds')
         
         
 ######################################################
