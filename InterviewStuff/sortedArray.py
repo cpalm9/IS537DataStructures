@@ -29,5 +29,8 @@ while ai < len(a) and bi < len(b):
         c.append(b[bi])
         bi+=1
 print(c)
+
+# c = sorted(a + b)
+# print(c)
     
     
