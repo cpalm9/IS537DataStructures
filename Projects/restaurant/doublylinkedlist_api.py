@@ -24,7 +24,8 @@ class DoublyLinkedList(object):
         # for x in range(self.size, 0,-1):
         #     reverse.append(str(r.value))
         #     r = r.prev
-        print('{} >>> {} >>> {}'.format(self.size, ', '.join(values), ' ,'.join(reverse))) 
+        # print('{} >>> {} >>> {}'.format(self.size, ', '.join(values), ' ,'.join(reverse)))
+        print('{} >>> {}'.format(self.size, ', '.join(values))) 
         
     def _get_node(self, index):
         '''Retrieves the Node object at the given index.  Throws an exception if the index is not within the bounds of the linked list.'''
@@ -38,28 +39,24 @@ class DoublyLinkedList(object):
             print('Error: Out of Bounds')
     
     def check_value(self, value):
-        for i in range(self.size):
-            if self._get_node(i).value == value:
-                return True
-            else:
-                return False
-    
+        for i in range(self.size - 1):
+            val = self._get_node(i).value
+            if val == value:
+                return val
+
     def check_index(self, value):
         for i in range(self.size - 1):
-            if self._get_node(i).value == value:
-                return i
-            else:
-                return False     
+            val = self._get_node(i).value
+            if val == value:
+                return i  
         
     def add(self, item):
         '''Adds an item to the end of the linked list.'''
         if self.head is not None:
             last_node = self._get_node(self.size-1)
             last_node.next = Node(item)
+            last_node.next.prev = last_node
             self.size += 1
-            end_node = self._get_node(self.size - 1)
-            end_node.prev = self._get_node(self.size - 2)
-            self.tail = end_node
         else:
             self.head = Node(item)
             self.size += 1
@@ -95,12 +92,12 @@ class DoublyLinkedList(object):
         if index < self.size:
             node = self._get_node(index)
             print('{}'.format(node.value))
+            return node.value
         else:
             print('Error: Out of Bounds')
     
     def delete(self, index):
         '''Deletes the item at the given index. Throws an exception if the index is not within the bounds of the linked list.'''
-        print(self._get_node(index))
         if self._get_node(index):
             if index is not 0:
                 prev_val = self._get_node(index-1)

@@ -51,13 +51,20 @@ class Processor(object):
         self.callahead.add(args[0])
     
     def cmd_arrive(self, *args):
-        if self.callahead.check_value(args[0]):
-            self.callahead.delete(0)
-            self.waiting.insert(0, args[0])
-            self.buzzers.pop()
-        else:
-            self.waiting.add(args[0])
-            self.buzzers.pop()
+        # value = self.callahead.check_value(args[0])
+        # if (value == args[0]):
+        #     size = self.callahead.size
+        #     if size > 5:
+        #         self.waiting.insert(self.waiting.size - 4, args[0])
+        #     else:
+        #         print('This is for Haywards')
+        #         self.waiting.insert(0, args[0])
+        #     self.buzzers.pop()
+        #     index = self.callahead.check_index(args[0])
+        #     self.callahead.delete(index)
+        # else:
+        #     self.waiting.add(args[0])
+        #     self.buzzers.pop()
     def cmd_leave(self, *args):
         self.buzzers.push('Buzzer')
         index = self.waiting.check_index(args[0])
@@ -65,6 +72,10 @@ class Processor(object):
     
     def cmd_seat(self, *args):
         self.buzzers.push('Buzzer')
+        next_party = self.waiting._get_node(0)
+        print(next_party.value)
+        self.waiting.delete(0)
+
  
     def cmd_debug(self, *args):
         self.callahead.debug_print()
