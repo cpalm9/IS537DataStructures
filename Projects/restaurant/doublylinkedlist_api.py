@@ -21,9 +21,9 @@ class DoublyLinkedList(object):
         for x in range(self.size):
             values.append(str(n.value))
             n = n.next
-        for x in range(self.size, 0,-1):
-            reverse.append(str(r.value))
-            r = r.prev
+        # for x in range(self.size, 0,-1):
+        #     reverse.append(str(r.value))
+        #     r = r.prev
         print('{} >>> {} >>> {}'.format(self.size, ', '.join(values), ' ,'.join(reverse))) 
         
     def _get_node(self, index):
@@ -36,6 +36,20 @@ class DoublyLinkedList(object):
                 return n
         except:
             print('Error: Out of Bounds')
+    
+    def check_value(self, value):
+        for i in range(self.size):
+            if self._get_node(i).value == value:
+                return True
+            else:
+                return False
+    
+    def check_index(self, value):
+        for i in range(self.size - 1):
+            if self._get_node(i).value == value:
+                return i
+            else:
+                return False     
         
     def add(self, item):
         '''Adds an item to the end of the linked list.'''
@@ -52,19 +66,21 @@ class DoublyLinkedList(object):
         
     def insert(self, index, item):
         '''Inserts an item at the given index, shifting remaining items right.'''
-        if index <= self.size:
-            new_item = Node(item)
-            n = self._get_node(index)
-            prev_val = self._get_node(index - 1)
-            
-            prev_val.next = new_item
-            new_item.next = n
-            new_item.prev = prev_val
-            n.prev = new_item
-            
-            self.size += 1
-        else:
-            print('Error: Out of Bounds')
+        if self._get_node(index):
+            if index == 0:
+                temp_val = self.head
+                self.head = Node(item)
+                self.head.next = temp_val
+                self.size += 1
+
+            else:
+                prev_val = self._get_node(index-1)
+                follow_val = self._get_node(index)
+                prev_val.next = Node(item)
+                prev_val.next.prev = prev_val
+                prev_val.next.next = follow_val
+                prev_val.next.next.prev = prev_val.next
+                self.size += 1
     
     def set(self, index, item):
         '''Sets the given item at the given index.  Throws an exception if the index is not within the bounds of the linked list.'''
@@ -84,22 +100,16 @@ class DoublyLinkedList(object):
     
     def delete(self, index):
         '''Deletes the item at the given index. Throws an exception if the index is not within the bounds of the linked list.'''
-        if index < self.size:
+        print(self._get_node(index))
+        if self._get_node(index):
             if index is not 0:
-                if index == self.size - 1:
-                    prev_val = self._get_node(index-1)
-                    self.tail = prev_val
-                else:
-                    prev_val = self._get_node(index-1)
-                    next_val = self._get_node(index+1)
-                    prev_val.next = next_val
-                    next_val.prev = prev_val
+                prev_val = self._get_node(index-1)
+                prev_val.next = self._get_node(index+1)
+                prev_val.next.prev = prev_val
             else:
                 self.head = self._get_node(index+1)
 
             self.size -= 1
-        else:
-            print('Error: Out of Bounds')
         
     def swap(self, index1, index2):
         '''Swaps the values at the given indices.'''

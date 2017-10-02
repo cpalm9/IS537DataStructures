@@ -22,14 +22,14 @@ class CircularLinkedList(object):
     def debug_cycle(self, count):
         '''Prints a representation of the entire cycled list up to count items'''
         c = 0
+        values = []
+        n = self.head
         while c < count:
-            values = []
-            n = self.head
             for x in range(self.size):
                 values.append(str(n.value))
                 n = n.next
-            print('{} >>> {} >>>> COUNT: {}'.format(self.size, ', '.join(values), c))
-            c += 1 
+            c += 1
+        print('{} >>> {} >>>> COUNT: {}'.format(self.size, ', '.join(values), c)) 
         
     def _get_node(self, index):
         '''Retrieves the Node object at the given index.  Throws an exception if the index is not within the bounds of the linked list.'''
@@ -138,9 +138,21 @@ class Node(object):
 class CircularLinkedListIterator(object):
     def __init__(self, circular_list):
         '''Starts the iterator on the given circular list.'''
-        
+        self.circular_list = circular_list
+        self.index = 0
     def has_next(self):
         '''Returns whether there is another value in the list.'''
         
     def next(self):
         '''Returns the next value, and increments the iterator by one value.'''
+        if self.index >= self.circular_list.size:
+            self.index = 0
+            val = self.peek()
+            self.index += 1
+            return val.value
+        else:
+            val = self.peek()
+            self.index += 1
+            return val.value
+    def peek(self):
+        return self.circular_list._get_node(self.index)

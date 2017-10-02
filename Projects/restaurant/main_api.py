@@ -2,53 +2,88 @@
 from circularlist_api import CircularLinkedList, CircularLinkedListIterator
 from doublylinkedlist_api import DoublyLinkedList
 from stack_api import Stack
-# from queue_api import Queue
+from queue_api import Queue
 
 
-# class Processor(object):
+class Processor(object):
     
-#     def __init__(self):
-#         '''Creates the lists'''
-#         self.callahead = DoublyLinkedList()
-#         self.waiting = DoublyLinkedList()
-#         self.appetizers = Queue()
-#         self.buzzers = Stack()
-#         self.buzzers.push('Buzzer')
-#         self.buzzers.push('Buzzer')
-#         self.buzzers.push('Buzzer')
-#         self.buzzers.push('Buzzer')
-#         self.buzzers.push('Buzzer')
-#         self.buzzers.push('Buzzer')
-#         self.buzzers.push('Buzzer')
-#         self.buzzers.push('Buzzer')
-#         self.songs = CircularLinkedList()
-#         self.songs.add('Song 1')
-#         self.songs.add('Song 2')
-#         self.songs.add('Song 3')
-#         self.songs_iter = CircularLinkedListIterator(self.songs)
+    def __init__(self):
+        '''Creates the lists'''
+        self.callahead = DoublyLinkedList()
+        self.waiting = DoublyLinkedList()
+        self.appetizers = Queue()
+        self.buzzers = Stack()
+        self.buzzers.push('Buzzer')
+        self.buzzers.push('Buzzer')
+        self.buzzers.push('Buzzer')
+        self.buzzers.push('Buzzer')
+        self.buzzers.push('Buzzer')
+        self.buzzers.push('Buzzer')
+        self.buzzers.push('Buzzer')
+        self.buzzers.push('Buzzer')
+        self.songs = CircularLinkedList()
+        self.songs.add('Song 1')
+        self.songs.add('Song 2')
+        self.songs.add('Song 3')
+        self.songs_iter = CircularLinkedListIterator(self.songs)
 
-#     def run(self, f):
-#         '''Processes the given file stream.'''
-#         for line_i, line in enumerate(f):
-#             line = line.rstrip()
-#             # split and handle the commands here
+    def run(self, f):
+        '''Processes the given file stream.'''
+        for line_i, line in enumerate(f):
+            line = line.rstrip()
+            # split and handle the commands here
+            print('{}:{}'.format(line_i, line))
+            parts = line.split(',')
+            try:
+                func = getattr(self, 'cmd_{}'.format(parts[0].lower()))
+                func(*parts[1:])
+            except Exception as e:
+                print('Error: {}'.format(e))
             
+    # def cmd_song(self, *args):
+    def cmd_appetizer(self, *args):
+        self.appetizers.dequeue()
+    
+    def cmd_appetizer_ready(self, *args):
+        self.appetizers.enqueue(args[0])
+    
+    def cmd_call(self, *args):
+        self.callahead.add(args[0])
+    
+    def cmd_arrive(self, *args):
+        if self.callahead.check_value(args[0]):
+            self.callahead.delete(0)
+            self.waiting.insert(0, args[0])
+            self.buzzers.pop()
+        else:
+            self.waiting.add(args[0])
+            self.buzzers.pop()
+    def cmd_leave(self, *args):
+        self.buzzers.push('Buzzer')
+        index = self.waiting.check_index(args[0])
+        self.waiting.delete(index)
+    
+    def cmd_seat(self, *args):
+        self.buzzers.push('Buzzer')
+ 
+    def cmd_debug(self, *args):
+        self.callahead.debug_print()
+        self.waiting.debug_print()
+        self.appetizers.debug_print()
+        self.buzzers.debug_print()
+        self.songs.debug_print()
+    def cmd_song(self, *args):
+        val = self.songs_iter.next()
+        print(val)
 
-#     def debug(self):
-#         self.callahead.debug_print()
-#         self.waiting.debug_print()
-#         self.appetizers.debug_print()
-#         self.buzzers.debug_print()
-#         self.songs.debug_print()
 
 
+#######################
+###   Main loop
 
-# #######################
-# ###   Main loop
-
-# with open('data.csv', newline='') as f:
-#     processor = Processor()
-#     processor.run(f)
+with open('example_data.csv', newline='') as f:
+    processor = Processor()
+    processor.run(f)
 
 # cl = CircularLinkedList()
 # cl.add('test')
@@ -80,14 +115,22 @@ from stack_api import Stack
 # dl.delete(3)
 # dl.debug_print()
 
-st = Stack()
-st.push('test')
-st.debug_print()
-st.push('test1')
-st.debug_print()
-st.push('test2')
-st.debug_print()
-st.pop()
-st.debug_print()
+# st = Stack()
+# st.push('test')
+# st.debug_print()
+# st.push('test1')
+# st.debug_print()
+# st.push('test2')
+# st.debug_print()
+# st.pop()
+# st.debug_print()
 
+# q = Queue()
+# q.debug_print()
+# q.enqueue('test0')
+# q.enqueue('test1')
+# q.enqueue('test2')
+# q.debug_print()
+# q.dequeue()
+# q.debug_print()
 

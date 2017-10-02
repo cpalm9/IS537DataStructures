@@ -22,5 +22,5 @@ class Stack(LinkedList):
         '''
         end_node = self._get_node(self.size - 1)
         self.delete(self.size - 1)
-        print(end_node.value)
+        # print(end_node.value)
 
