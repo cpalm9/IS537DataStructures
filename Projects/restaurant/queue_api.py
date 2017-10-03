@@ -34,5 +34,5 @@ class Queue(object):
 
     def size(self):
         '''Returns the number of items in the queue'''
-        print(self.ll.size)
+        return self.ll.size
 

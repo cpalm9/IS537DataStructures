@@ -41,11 +41,18 @@ class Processor(object):
                 print('Error: {}'.format(e))
             
     def cmd_appetizer(self, *args):
-        waiting = []
-        for x in range(self.waiting.size - 1, self.waiting.size - 3, -1):
-            waiting.append(str(self.waiting._get_node(x).value))
-        print('{} >>> {}'.format(self.appetizers.dequeue(), ', '.join(waiting)))
-
+        wait = []
+        r = self.waiting._get_node(self.waiting.size - 1)
+        i = 0
+        try:
+            if self.waiting.size > 3:
+                i = self.waiting.size - 3
+            for x in range(self.waiting.size, i,-1):
+                    wait.append(str(r.value))
+                    r = r.prev
+            print('{} >>> {}'.format(self.appetizers.dequeue(), ', '.join(wait)))
+        except:
+            raise IndexError('The given index is not within the bounds of the current list.')
     
     def cmd_appetizer_ready(self, *args):
         self.appetizers.enqueue(args[0])

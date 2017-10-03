@@ -12,6 +12,7 @@ class Stack(LinkedList):
     def push(self, item):
         '''Pushes an item onto the stack'''
         self.insert(self.size,item)
+        return True
 
     def pop(self):
         '''
@@ -22,5 +23,6 @@ class Stack(LinkedList):
         '''
         end_node = self._get_node(self.size - 1)
         self.delete(self.size - 1)
+        return end_node.value
         # print(end_node.value)
 

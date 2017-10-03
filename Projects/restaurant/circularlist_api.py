@@ -29,7 +29,7 @@ class CircularLinkedList(object):
                 values.append(str(n.value))
                 n = n.next
             c += 1
-        print('{} >>> {} >>>> COUNT: {}'.format(self.size, ', '.join(values), c)) 
+        print('{} >>> {}'.format(self.size, ', '.join(values))) 
         
     def _get_node(self, index):
         '''Retrieves the Node object at the given index.  Throws an exception if the index is not within the bounds of the linked list.'''
@@ -83,6 +83,7 @@ class CircularLinkedList(object):
         if index < self.size:
             node = self._get_node(index)
             print(node.value)
+            return node.value
             # print(node.next)
         else:
             print('Error: Out of Bounds')
