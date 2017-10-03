@@ -81,10 +81,13 @@ class Processor(object):
         self.waiting.delete(index)
     
     def cmd_seat(self, *args):
-        self.buzzers.push('Buzzer')
-        next_party = self.waiting._get_node(0)
-        print(next_party.value)
-        self.waiting.delete(0)
+        if self.waiting.size != 0:
+            self.buzzers.push('Buzzer')
+            next_party = self.waiting._get_node(0)
+            print(next_party.value)
+            self.waiting.delete(0)
+        else:
+            raise IndexError('The given index is not within the bounds of the current list.')
 
  
     def cmd_debug(self, *args):
@@ -102,7 +105,7 @@ class Processor(object):
 #######################
 ###   Main loop
 
-with open('example_data.csv', newline='') as f:
+with open('data.csv', newline='') as f:
     processor = Processor()
     processor.run(f)
 

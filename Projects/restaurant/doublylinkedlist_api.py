@@ -15,17 +15,34 @@ class DoublyLinkedList(object):
     def debug_print(self):
         '''Prints a representation of the entire list.'''
         values = []
-        reverse = []
+        # reverse = []
+        # print(reverse)
+        output = str(self.size) + ' >>> '
         n = self.head
         r = self._get_node(self.size - 1)
-        for x in range(self.size):
+
+        while (n != None):
             values.append(str(n.value))
+            output += str(n.value)
+            if n.next is not None:
+                output += ", "
             n = n.next
-        for x in range(self.size, 0,-1):
-            reverse.append(str(r.value))
-            r = r.prev
-        print('{} >>> {} >>> {}'.format(self.size, ', '.join(values), ' ,'.join(reverse)))
-        # print('{} >>> {}'.format(self.size, ', '.join(values))) 
+        n = r
+        output += ' >>> '
+        while (n != None):
+            values.append(str(n.value))
+            output += str(n.value)
+            if n.prev is not None:
+                output += ", "
+            n = n.prev
+        print(output)
+        # for x in range(self.size):
+        #     values.append(str(n.value))
+        #     n = n.next
+        # for x in range(self.size - 1, 0,-1):
+        #     reverse.append(str(r.value))
+        #     r = r.prev
+        # print('{} >>> {} >>> {}'.format(self.size, ', '.join(values), ', '.join(reverse)))
         
     def _get_node(self, index):
         '''Retrieves the Node object at the given index.  Throws an exception if the index is not within the bounds of the linked list.'''
@@ -36,7 +53,7 @@ class DoublyLinkedList(object):
                     n = n.next
                 return n
         except:
-            print('Error: Out of Bounds')
+            raise IndexError('The given index is not within the bounds of the current list.')
     
     def check_value(self, value):
         n = self.head
@@ -72,6 +89,7 @@ class DoublyLinkedList(object):
                 temp_val = self.head
                 self.head = Node(item)
                 self.head.next = temp_val
+                temp_val.prev = self.head
                 self.size += 1
 
             else:
@@ -89,7 +107,7 @@ class DoublyLinkedList(object):
             node = self._get_node(index)
             node.value = item
         else:
-            print('Error: Out of Bounds')
+            raise IndexError('The given index is not within the bounds of the current list.')
         
     def get(self, index):
         '''Retrieves the item at the given index.  Throws an exception if the index is not within the bounds of the linked list.'''
@@ -98,7 +116,7 @@ class DoublyLinkedList(object):
             print('{}'.format(node.value))
             return node.value
         else:
-            print('Error: Out of Bounds')
+            raise IndexError('The given index is not within the bounds of the current list.')
     
     def delete(self, index):
         '''Deletes the item at the given index. Throws an exception if the index is not within the bounds of the linked list.'''
@@ -109,8 +127,10 @@ class DoublyLinkedList(object):
                 if self._get_node(index + 1) is not None:
                     prev_val.next.prev = prev_val
             else:
+                if self.head == None:
+                    raise IndexError('The given index is not within the bounds of the current list.') 
                 self.head = self._get_node(index+1)
-
+                self.head.prev = None
             self.size -= 1
         
     def swap(self, index1, index2):
@@ -126,7 +146,7 @@ class DoublyLinkedList(object):
                 self._get_node(index2).value = swap_node
                 
         else:
-            print('Error: Out of Bounds')
+            raise IndexError('The given index is not within the bounds of the current list.')
         
         
 ######################################################

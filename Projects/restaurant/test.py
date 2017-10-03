@@ -46,12 +46,13 @@ class UnitTests(unittest.TestCase):
         cl.delete(2)
         cl.debug_print()
         cl.insert(1, 'INSERT')
-        cl.debug_print()
         cl.swap(0,1)
         self.assertEqual(cl.get(1), 'TEST')
-        cl.debug_cycle(4)
         cl.delete(5)
         self.assertEqual(cl.get(4), 'test1')
+        self.assertEqual(cl.head, cl._get_node(cl.size - 1).next)
+        cl.swap(1, cl.size - 1)
+        self.assertEqual(cl.head, cl._get_node(cl.size - 1).next)        
     
     def test_dl(self):
         dl = DoublyLinkedList()
@@ -63,9 +64,13 @@ class UnitTests(unittest.TestCase):
         dl.add('test1')
         dl.add('test2')
         self.assertEqual(dl.get(3), 'test')
+        dl.set(2, 'C')
+        self.assertEqual(dl.get(2), 'C')
         dl.insert(1, 'TEST1')
         dl.delete(3)
         self.assertEqual(dl.head.value, 'a')
+        dl.swap(0,1)
+        self.assertEqual(dl.head.value, 'TEST1')
         self.assertEqual(dl._get_node(1).prev, dl.head)
 
 if __name__ == '__main__':
