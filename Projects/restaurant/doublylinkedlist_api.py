@@ -17,15 +17,15 @@ class DoublyLinkedList(object):
         values = []
         reverse = []
         n = self.head
-        r = self.tail
+        r = self._get_node(self.size - 1)
         for x in range(self.size):
             values.append(str(n.value))
             n = n.next
-        # for x in range(self.size, 0,-1):
-        #     reverse.append(str(r.value))
-        #     r = r.prev
-        # print('{} >>> {} >>> {}'.format(self.size, ', '.join(values), ' ,'.join(reverse)))
-        print('{} >>> {}'.format(self.size, ', '.join(values))) 
+        for x in range(self.size, 0,-1):
+            reverse.append(str(r.value))
+            r = r.prev
+        print('{} >>> {} >>> {}'.format(self.size, ', '.join(values), ' ,'.join(reverse)))
+        # print('{} >>> {}'.format(self.size, ', '.join(values))) 
         
     def _get_node(self, index):
         '''Retrieves the Node object at the given index.  Throws an exception if the index is not within the bounds of the linked list.'''
@@ -39,16 +39,20 @@ class DoublyLinkedList(object):
             print('Error: Out of Bounds')
     
     def check_value(self, value):
-        for i in range(self.size - 1):
-            val = self._get_node(i).value
-            if val == value:
-                return val
+        n = self.head
+        while n != None:
+            if n.value == value:
+                return True
+            n = n.next
 
     def check_index(self, value):
-        for i in range(self.size - 1):
-            val = self._get_node(i).value
-            if val == value:
-                return i  
+        n = self.head
+        i = 0
+        while n != None:
+            if n.value == value:
+                return i
+            n = n.next
+            i +=1
         
     def add(self, item):
         '''Adds an item to the end of the linked list.'''
@@ -102,7 +106,8 @@ class DoublyLinkedList(object):
             if index is not 0:
                 prev_val = self._get_node(index-1)
                 prev_val.next = self._get_node(index+1)
-                prev_val.next.prev = prev_val
+                if self._get_node(index + 1) is not None:
+                    prev_val.next.prev = prev_val
             else:
                 self.head = self._get_node(index+1)
 

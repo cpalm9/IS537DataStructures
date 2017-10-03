@@ -30,7 +30,7 @@ class Queue(object):
         '''
         first_node = self.ll.head
         self.ll.delete(0)
-        print(first_node.value)
+        return first_node.value
 
     def size(self):
         '''Returns the number of items in the queue'''

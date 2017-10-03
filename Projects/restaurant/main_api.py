@@ -40,9 +40,12 @@ class Processor(object):
             except Exception as e:
                 print('Error: {}'.format(e))
             
-    # def cmd_song(self, *args):
     def cmd_appetizer(self, *args):
-        self.appetizers.dequeue()
+        waiting = []
+        for x in range(self.waiting.size - 1, self.waiting.size - 3, -1):
+            waiting.append(str(self.waiting._get_node(x).value))
+        print('{} >>> {}'.format(self.appetizers.dequeue(), ', '.join(waiting)))
+
     
     def cmd_appetizer_ready(self, *args):
         self.appetizers.enqueue(args[0])
@@ -51,20 +54,20 @@ class Processor(object):
         self.callahead.add(args[0])
     
     def cmd_arrive(self, *args):
-        # value = self.callahead.check_value(args[0])
-        # if (value == args[0]):
-        #     size = self.callahead.size
-        #     if size > 5:
-        #         self.waiting.insert(self.waiting.size - 4, args[0])
-        #     else:
-        #         print('This is for Haywards')
-        #         self.waiting.insert(0, args[0])
-        #     self.buzzers.pop()
-        #     index = self.callahead.check_index(args[0])
-        #     self.callahead.delete(index)
-        # else:
-        #     self.waiting.add(args[0])
-        #     self.buzzers.pop()
+        if (self.callahead.check_value(args[0])):
+            if self.waiting.size > 5:
+                self.waiting.insert(self.waiting.size - 4, args[0])
+                index = self.callahead.check_index(args[0])
+                self.callahead.delete(index)
+            else:
+                self.waiting.insert(0, args[0])
+                index = self.callahead.check_index(args[0])
+                self.callahead.delete(index)
+        else:
+            self.waiting.add(args[0])
+        self.buzzers.pop()
+        
+
     def cmd_leave(self, *args):
         self.buzzers.push('Buzzer')
         index = self.waiting.check_index(args[0])
