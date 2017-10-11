@@ -60,6 +60,8 @@ def print_words(words, threshold=None, word=None):
 def main():
     '''Main program'''
     master = []
+    for x in FILENAMES:
+        print(x)
     # loop through the filenames and analyze each one
     # after analyzing each file, merge the master and words lists into a single, sorted list (which becomes the new master list)
     print('INDIVIDUAL BOOKS > 2%')
