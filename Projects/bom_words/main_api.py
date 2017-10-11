@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+# CHRIS COMMENT
 FILENAMES = [
     [ '1 Nephi',         '01-1 Nephi.txt' ],
     [ '2 Nephi',         '02-2 Nephi.txt' ],
