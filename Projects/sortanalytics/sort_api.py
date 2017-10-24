@@ -27,16 +27,22 @@ class SortMethods(object):
             input[small], input[i] = input[i], input[small]
         return input
 
-    def quick_sort(self, input):
+    def quicksort(self, input):
         ARRAY_LENGTH = len(input)
         if( ARRAY_LENGTH <= 1):
             return input
         else:
             PIVOT = input[0]
-            # GREATER = [ element for element in input[1:] if element > PIVOT ]
-            GREATER = []
-            for element in input[1:]:
-                if element > PIVOT:
-                    GREATER.append(element)
+            GREATER = [ element for element in input[1:] if element > PIVOT ]
+            # GREATER = []
+            # for element in input[1:]:
+            #     if element > PIVOT:
+            #         GREATER.append(element)
             LESSER = [ element for element in input[1:] if element <= PIVOT ]
-            return quickSort(LESSER) + [PIVOT] + quickSort(GREATER)
+            return self.quicksort(LESSER) + [PIVOT] + self.quicksort(GREATER)
+
+    def python_sort(self, input):
+        input.sort()
+        return input
+
+    
