@@ -6,10 +6,10 @@ import re, time
 FILENAMES = [
     [ 'list1.txt', 'int'   ], 
     [ 'list2.txt', 'int'   ], 
-    # [ 'list3.txt', 'int'   ], 
-    # [ 'list4.txt', 'int'   ], 
-    # [ 'list5.txt', 'float' ], 
-    # [ 'list6.txt', 'int'   ], 
+    [ 'list3.txt', 'int'   ], 
+    [ 'list4.txt', 'int'   ], 
+    [ 'list5.txt', 'float' ], 
+    [ 'list6.txt', 'int'   ], 
 ]
 
         
@@ -115,13 +115,11 @@ def main():
     
         sorted_master = sorted(master_list, key=getTime)
         for t in sorted_master:
-            # print(t.duration)
-            # print('fastest >>>', fastest_time)
             t.relative = (t.duration - fastest_time) / fastest_time
 
         for x in sorted_master:
             print(x.name)
-            print(x.duration)
+            print(round(x.duration, 6))
             print(round(x.relative, 2), '%')
             print("First 10: ",', '.join(str(x) for x in x.first_10))
             print("Last 10: ", ', '.join(str(x) for x in x.last_10), "\n")
