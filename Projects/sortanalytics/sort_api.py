@@ -32,13 +32,18 @@ class SortMethods(object):
         if( ARRAY_LENGTH <= 1):
             return input
         else:
+            # print('INPUT ',input)
             PIVOT = input[0]
+            # print('Pivot ', PIVOT)
             GREATER = [ element for element in input[1:] if element > PIVOT ]
+            # print("GREATER ",GREATER)
             # GREATER = []
             # for element in input[1:]:
             #     if element > PIVOT:
             #         GREATER.append(element)
             LESSER = [ element for element in input[1:] if element <= PIVOT ]
+            # print("LESSER ", LESSER)
+            # print('CONCAT ARRAY ', LESSER + [PIVOT] + GREATER)
             return self.quicksort(LESSER) + [PIVOT] + self.quicksort(GREATER)
 
     def python_sort(self, input):
