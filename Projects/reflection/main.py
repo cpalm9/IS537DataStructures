@@ -61,4 +61,5 @@ if __name__ == '__main__':
 
     # print
     js = to_json(p3)
-    
+    with open('output.json', 'w') as outfile:
+        outfile.write(js)
