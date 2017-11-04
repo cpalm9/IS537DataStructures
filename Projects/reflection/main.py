@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from serialize import to_json
+import json
 
 
 ################################################
@@ -59,4 +60,5 @@ if __name__ == '__main__':
     p3 = Person('River Song/Melody Pond', 'F', b3, True, 91234.56, 2001, p1, p2, f3)
 
     # print
-    print(to_json(p3))
+    js = to_json(p3)
+    
