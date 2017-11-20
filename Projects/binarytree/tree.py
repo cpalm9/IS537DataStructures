@@ -6,11 +6,34 @@ class b_tree(object):
 
     '''stores a key=value pair to the tree in the appropriate spot.'''
     def set(self, key, value):
-        pass
+        new_node = Node(key, value)
+        if self.root is None:
+            self.root = new_node
+        else:
+            curr_node = self.root
+            while curr_node is not None:
+                parent = curr_node
+                if new_node.value < curr_node.value:
+                    curr_node = curr_node.left
+                else:
+                    curr_node = curr_node.right
+            if new_node.value < parent.value:
+                parent.left = new_node
+            else:
+                parent.right = new_node
+            new_node.parent = parent
+            
     
     '''returns the value stored with the given key.  If the key does not exist, null/None should be returned.'''
     def get(self, key):
-        pass
+        curr_node = self.root
+        while curr_node is not None and curr_node.key is not key:
+            if key < curr_node.key:
+                curr_node = curr_node.left
+            else:
+                curr_node = curr_node.right
+        return curr_node
+
 
     '''removes the node with the given key from the tree.  If the key does not exist, it should simply return (no error).'''
     def remove(self, key):
