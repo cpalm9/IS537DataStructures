@@ -53,7 +53,7 @@ class b_tree(object):
             # print(">>>>>>>>> CURR_NODE KEY:",curr_node.key, repr(curr_node.key))
             # print(">>>>>>>>> KEY:",key, repr(key))
             if curr_node.key.strip() == key.strip():
-                return curr_node.value
+                return curr_node
             elif key < curr_node.key:
                 curr_node = curr_node.left
             elif key > curr_node.key:

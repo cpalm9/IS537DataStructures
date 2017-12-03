@@ -21,7 +21,9 @@ class HashTable(object):
         hash_key = self.get_hash(key)
         return self.bucket[hash_key].get(key)
     def remove(self,key):
-        pass
+        key = key.lower()
+        hash_key = self.get_hash(key)
+        return self.bucket[hash_key].remove(key)
     def get_hash(self, key):
         pass
     def debug_print(self):
@@ -40,12 +42,12 @@ class GuidHashTable(HashTable):
         key = key.lower()
         key = re.sub("\D", "", key)
         key = ''.join(random.sample(key, len(key)))
-        return sum([ord(c) for c in key]) % 10
+        return ((len(key)^128) + sum([ord(c) for c in key])) % 10
 class ImageHashTable(HashTable):
     def get_hash(self, key):
         path = 'images/'
         size = self.findSize(key, path)
-        return ((size^256)) % 10
+        return ((size^256) + sum([ord(c) for c in key])) % 10
     def findSize(self, name, path):
         for files in os.listdir(path):
             if name.strip() in files:
