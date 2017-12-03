@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 from collections import deque
+import difflib
 
 class b_tree(object):
     def __init__(self):
         self.root = None
+        self.size = 0
 
     def _replace_node(self, node, newKids):
         if newKids is not None:
@@ -41,17 +43,23 @@ class b_tree(object):
             else:
                 parent.right = new_node
             new_node.parent = parent
+        self.size += 1
             
     
     '''returns the value stored with the given key.  If the key does not exist, null/None should be returned.'''
     def get(self, key):
         curr_node = self.root
-        while curr_node is not None and curr_node.key != key:
-            if key < curr_node.key:
+        while curr_node is not None:
+            # print(">>>>>>>>> CURR_NODE KEY:",curr_node.key, repr(curr_node.key))
+            # print(">>>>>>>>> KEY:",key, repr(key))
+            if curr_node.key.strip() == key.strip():
+                return curr_node.value
+            elif key < curr_node.key:
                 curr_node = curr_node.left
-            else:
+            elif key > curr_node.key:
                 curr_node = curr_node.right
-        return curr_node
+            else:
+                return ''
 
 
     '''removes the node with the given key from the tree.  If the key does not exist, it should simply return (no error).'''
@@ -101,11 +109,11 @@ class b_tree(object):
     def walk_bfs(self, node):
         q = deque([node])
         current_level = 1
-
+        values = []
         while len(q) > 0:
 
             current_node = q.popleft()
-            print(current_node.value)
+            values.append(str(current_node.value).rstrip())
 
             if current_node.left != None:
                 q.append(current_node.left)
@@ -114,6 +122,7 @@ class b_tree(object):
                 q.append(current_node.right)
 
             current_level += 1
+        return (', '.join(values))
     
     '''prints a graphical representation of the tree'''
     def debug_print(self):
