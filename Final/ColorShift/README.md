@@ -44,21 +44,21 @@ Please **fill out the following** with your expected grades on the following:
 
 | Function       | Task                                                   |  Score  | Possible |
 |----------------|--------------------------------------------------------|--------:|---------:|
-| `separate_rgb` | function uses bit masking correctly                    |       0 |        5 |
-| `separate_rgb` | function uses bit shifting correctly                   |       0 |        5 |
-| `separate_rgb` | return value is correct                                |       0 |        5 |
-| `combine_rgb`  | function uses bit shifting correctly                   |       0 |        5 |
-| `combine_rgb`  | return value is correct                                |       0 |        5 |
-| `adjust_color` | num is adjusted higher or lower (based on the percent) |       0 |        5 |
-| `adjust_color` | return value cannot be below 0                         |       0 |        5 |
-| `adjust_color` | return value cannot be above 255                       |       0 |        5 |
-| `adjust_color` | return value is an integer (not a float)               |       0 |        5 |
-| `calc_luma`    | formula is correctly implemented                       |       0 |       10 |
-| `calc_luma`    | return value is an integer (not a float)               |       0 |        5 |
-| `luma_sort`    | counting list created with empty sublists              |       0 |       10 |
-| `luma_sort`    | counting list size is correct                          |       0 |        5 |
-| `luma_sort`    | iteration places tiles into counting list              |       0 |       10 |
-| `luma_sort`    | counting list is flattened into results list           |       0 |       10 |
-| `luma_sort`    | returns value is a new list, sorted by luma            |       0 |        5 |
-| Final Score    |                                                        |       0 |      100 |
+| `separate_rgb` | function uses bit masking correctly                    |       4 |        5 |
+| `separate_rgb` | function uses bit shifting correctly                   |       4 |        5 |
+| `separate_rgb` | return value is correct                                |       5 |        5 |
+| `combine_rgb`  | function uses bit shifting correctly                   |       5 |        5 |
+| `combine_rgb`  | return value is correct                                |       5 |        5 |
+| `adjust_color` | num is adjusted higher or lower (based on the percent) |       4 |        5 |
+| `adjust_color` | return value cannot be below 0                         |       5 |        5 |
+| `adjust_color` | return value cannot be above 255                       |       5 |        5 |
+| `adjust_color` | return value is an integer (not a float)               |       5 |        5 |
+| `calc_luma`    | formula is correctly implemented                       |       9 |       10 |
+| `calc_luma`    | return value is an integer (not a float)               |       5 |        5 |
+| `luma_sort`    | counting list created with empty sublists              |       10 |       10 |
+| `luma_sort`    | counting list size is correct                          |       5 |        5 |
+| `luma_sort`    | iteration places tiles into counting list              |       10 |       10 |
+| `luma_sort`    | counting list is flattened into results list           |       10 |       10 |
+| `luma_sort`    | returns value is a new list, sorted by luma            |       5 |        5 |
+| Final Score    |                                                        |       96 |      100 |
 

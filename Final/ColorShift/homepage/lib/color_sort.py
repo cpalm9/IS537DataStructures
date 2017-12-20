@@ -42,7 +42,26 @@ def luma_sort(tile_list):
     #
 
     # replace this stub:
-    return list(tile_list)
+
+    # creates a counting list
+    count_ar = [[] for i in range(256)]
+
+    # loops through the tile list and appends a tile the corresponding list within the counting list based on the luma value
+    for node in tile_list:
+        value = node.luma
+        count_ar[value].append(node)
+
+    # create an ordered list
+    ordered = []
+    
+    # if c exists: append the tile to the ordered list
+    for c in count_ar:
+        if c:
+            ordered.append(c)
+
+    # combine the list of lists into one ordered list
+    results = sum(ordered, [])
+    return results
     
 
 

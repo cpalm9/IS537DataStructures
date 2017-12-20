@@ -11,7 +11,14 @@ def separate_rgb(num):
     # example: separate_rgb(8421504) == ( 128, 128, 128 )
 
     # replace this stub:
-    return (128, 128, 128)
+
+    # using the & and >> bitwise operators, I am able to take the RGB int and shift the bits accordingly
+
+    blue = num & 255
+    green = (num >> 8) & 255
+    red = (num >> 16) & 255
+
+    return (red, green, blue)
     
 def combine_rgb(red, green, blue):
     '''Combines the R, G, B parts into a single integer using bit shifting/masking'''
@@ -22,7 +29,11 @@ def combine_rgb(red, green, blue):
     # example: combine_rgb(128, 128, 128) == 8421504
 
     # replace this stub:
-    return 8421504
+
+    # this will shift the bits left, then add the numbers to create the proper integer
+    rgb_int = (red << 16) + (green << 8) + blue
+
+    return rgb_int
 
 def adjust_color(num, percent):
     '''Returns the color num adjusted by the percent value'''
@@ -33,7 +44,21 @@ def adjust_color(num, percent):
     # example: adjust_color(128, -0.4) == 77
 
     # replace this stub:
-    return 128
+    
+    # get the percentage change
+    adj_perc = num * percent
+
+
+    # adjust the color based on the percent change
+    if adj_perc < 0:
+        adj_color = int(round(num - abs(adj_perc)))
+    else:
+        adj_color = int(round(num + adj_perc))
+
+    if adj_color < 0 and adj_color > 255:
+        ValueError
+    else:
+        return adj_color
     
 
 def calc_luma(num):
@@ -47,4 +72,10 @@ def calc_luma(num):
     # example: calc_luma(8421504) == 128
 
     # replace this stub:
-    return 128
+
+    red,blue,green = separate_rgb(num)
+    luma_num = int(round((0.299 * red) + (0.587 * green) + (0.114 * blue)))
+    if luma_num < 0 and luma_num > 255:
+        ValueError
+    else:
+        return luma_num
